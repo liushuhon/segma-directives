@@ -1,18 +1,17 @@
 <template>
-    <div class="about">test
-        <el-input v-model="abcVal"
+    <div class="about">
+        <el-input v-model="value"
                   v-number="{}"
                   size="small"></el-input>
-        <h1>This is an about page</h1>
     </div>
 </template>
 <script>
 
 export default {
-    name: 'About',
+    name: 'OnlyNumber',
     data() {
         return {
-            abcVal: '12'
+            value: '12'
         }
     }
 }
