@@ -1,6 +1,6 @@
 {
   "name": "segma-directives",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "```\r npm install\r ```",
   "main": "index.js",
   "directories": {

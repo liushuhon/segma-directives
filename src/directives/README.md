@@ -1,29 +1,21 @@
-# only_number
+# segma-directives
 
-## Project setup
+## 安装依赖
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+npm install segma-directives --save
 ```
 
-### Compiles and minifies for production
+### 配置
 ```
-npm run build
-```
+src/plugins/directives/index.js
 
-### Run your tests
-```
-npm run test
-```
+import onlyNumber from 'segma-directives/lib/only_number';
+const directives = [
+    //此处加入指令
+    {
+        name: 'number',
+        directive: number
+    }
+];
 
-### Lints and fixes files
 ```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
