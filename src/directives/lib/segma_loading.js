@@ -2,8 +2,8 @@
  * Created by cld on 2020/3/20.
  */
 // js 文件
-import '../../assets/css/segma_loading.css';
-import segma_loading from '../../assets/images/segma_loading.svg';
+import '../css/segma_loading.css';
+import segma_loading from '../image/segma_loading.svg';
 
 function getElementStyle(obj, attr) {
     if (obj.currentStyle) {
@@ -38,7 +38,7 @@ export default {
         roundDiv.appendChild(textEle);
         tempDiv.appendChild(roundDiv);
         el.loadingElement = tempDiv;
-        
+
         const position = getElementStyle(el, 'position');
         if (position !== 'absolute' && position !== 'relative') {
             el.style.position = 'relative';
