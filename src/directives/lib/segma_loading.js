@@ -15,9 +15,12 @@ function getElementStyle(obj, attr) {
 
 export default {
     inserted: (el, binding, Vnode) => {
-        const bgColor = Vnode.data.attrs['segma-loading-background']
-        const text = Vnode.data.attrs['segma-loading-text']
-        console.log(el, binding, Vnode)
+        let bgColor = 'rgba(255, 255, 255, 0.65)'
+        let text = ''
+        if (Vnode.data && Vnode.data.attrs) {
+            bgColor = typeof Vnode.data.attrs['segma-loading-background'] !== 'undefined' ? Vnode.data.attrs['segma-loading-background'] : 'rgba(255, 255, 255, 0.65)'
+            text = typeof Vnode.data.attrs['segma-loading-text'] !== 'undefined' ? Vnode.data.attrs['segma-loading-text'] : ''
+        }
         //背景框
         const tempDiv = document.createElement('div');
         tempDiv.className = 'custom-loading';
@@ -29,13 +32,15 @@ export default {
         const roundEle = document.createElement('div');
         roundEle.innerHTML = `<img src=${segma_loading}>`;
         roundEle.className = 'custom-loading-icon';
-        //文字区域
-        const textEle = document.createElement('div');
-        textEle.innerHTML = text;
-        textEle.className = 'custom-loading-text';
+        if (text !== '') {
+            //文字区域
+            const textEle = document.createElement('div');
+            textEle.innerHTML = text;
+            textEle.className = 'custom-loading-text';
+            roundDiv.appendChild(textEle);
+        }
         //注册
         roundDiv.appendChild(roundEle);
-        roundDiv.appendChild(textEle);
         tempDiv.appendChild(roundDiv);
         el.loadingElement = tempDiv;
 
