@@ -10,11 +10,15 @@ npm install segma-directives --save
 src/plugins/directives/index.js
 
 import onlyNumber from 'segma-directives/lib/only_number';
+import segmaLoading from 'segma-directives/lib/segma_loading';
 const directives = [
-    //此处加入指令
     {
         name: 'number',
         directive: number
+    },
+    {
+            name: 'segma-loading',
+            directive: segmaLoading
     }
 ];
 
