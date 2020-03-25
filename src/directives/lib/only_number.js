@@ -55,7 +55,7 @@ const dealRange = (inputValue, binding) => {
  */
 const filterChinese = (inputValue) => {
     let reg = /[^\d.]/g;
-    return inputValue.replace(reg, '');
+    return inputValue.toString().replace(reg, '');
 };
 /**
  * 阻止输入
