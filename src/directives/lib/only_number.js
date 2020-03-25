@@ -48,7 +48,15 @@ const dealRange = (inputValue, binding) => {
     }
     return result;
 };
-
+/**
+ * 不允许键入中文
+ * @param inputValue
+ * @returns {void | string | never}
+ */
+const filterChinese = (inputValue) => {
+    let reg = /[^\d.]/g;
+    return inputValue.replace(reg, '');
+};
 /**
  * 阻止输入
  * */
@@ -114,7 +122,8 @@ export default {
 
             // 处理数值范围
             let inputVal = dealRange(bindValue, binding);
-            setVal(inputVal, el, vNode);
+            let result = filterChinese(inputVal);
+            setVal(result, el, vNode);
         });
         // 失去焦点=>保留指定位小数
         el.addEventListener('focusout', e => { // 此处会在 el-input 的 @change 后执行

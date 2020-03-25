@@ -13,6 +13,21 @@ export default {
         return {
             value: '12'
         }
+    },
+    watch: {
+        /*value(val) {
+            this.value = this.filterInput(val);
+            console.log(this.value)
+        }*/
+    },
+    methods: {
+        filterInput(val) {
+            if (!val) {
+                return;
+            }
+            // 替换除汉字字母数字和指定的字符或特殊符号外的所有内容
+            return val.toString().replace(/[^\d.]/g, '');
+        }
     }
 }
 </script>
