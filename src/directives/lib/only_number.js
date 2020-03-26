@@ -41,10 +41,10 @@ const dealRange = (inputValue, binding) => {
     let bindMin = typeof binding.value.min === 'undefined' ? -Infinity : binding.value.min;
     let result = inputValue;
     if (inputValue < bindMin) {
-        result = bindMin;
+        result = Number(bindMin);
     }
     if (inputValue > bindMax) {
-        result = bindMax;
+        result = Number(bindMax);
     }
     return result;
 };
@@ -143,7 +143,7 @@ export default {
                 }
                 content = content.toFixed(arg_precision);
             }
-            setVal(content, el, vNode);
+            setVal(Number(content), el, vNode);
         });
     }
 };
