@@ -1,6 +1,6 @@
 {
   "name": "segma-directives",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "```\r npm install\r ```",
   "main": "index.js",
   "directories": {
@@ -13,5 +13,7 @@
     "segma-directives"
   ],
   "author": "liulius",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
 }
