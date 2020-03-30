@@ -34,7 +34,7 @@ module.exports = function (config) {
                 }
             ]
         },
-        browsers: ['Chrome'],
+        browsers: ['IE'],
         singleRun: true,
         captureConsole: true
     })

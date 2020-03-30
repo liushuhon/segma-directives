@@ -53,6 +53,7 @@ export default {
         }
     },
     update: (el, binding) => {
+        console.log(el.loadingElement.parentNode)
         if (binding.value) {
             if (el.loadingElement.parentNode === null) {
                 el.appendChild(el.loadingElement);
