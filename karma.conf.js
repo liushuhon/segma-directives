@@ -1,12 +1,12 @@
 let webpackConfig = require('@vue/cli-service/webpack.config.js')
-module.exports = function(config) {
+module.exports = function (config) {
     config.set({
         frameworks: [
             'mocha',
             'chai'
         ],
         files: [
-            'test/**/*.spec.js'   //tests目录下，所有.spce.js结尾的测试文件
+            'test/**/*.spec.js' //tests目录下，所有.spce.js结尾的测试文件
         ],
         preprocessors: {
             '**/*.spec.js': [
@@ -24,12 +24,18 @@ module.exports = function(config) {
             dir: './coverage',
             reporters: [
                 // 生成 lcov.info 以及 html 文件，lcov.info 该文件中包含了详细的每个文件，每行，每个函数的执行信息。
-                { type: 'lcov', subdir: '.' },
+                {
+                    type: 'lcov',
+                    subdir: '.'
+                },
                 // 在命令行输出简要覆盖率数据
-                { type: 'text-summary' }
+                {
+                    type: 'text-summary'
+                }
             ]
         },
         browsers: ['Chrome'],
-        singleRun: true
+        singleRun: true,
+        captureConsole: true
     })
 };
