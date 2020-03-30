@@ -1,39 +1,31 @@
 <template>
     <div class="about">
-        <el-input v-model="value"
-                  v-number="{}"
-                  size="small"></el-input>
-        <el-input v-model="value2"
-                  size="small"></el-input>
+        <el-input
+            v-model="value"
+            v-number="{ min: -8, max: 100, precision: 2 }"
+            size="small"
+        ></el-input>
+        <el-button @click="click" size="small">失去焦点按钮 </el-button>
     </div>
 </template>
 <script>
-
 export default {
-    name: 'OnlyNumber',
+    name: "OnlyNumber",
     data() {
         return {
-            value: 12,
+            value: -1,
             value2: 2
-        }
+        };
     },
     watch: {
-        value(val) {
-            // this.value = this.filterInput(val);
-            console.log(typeof val)
-        },
-        value2(val) {
-            console.log(typeof val)
+        value() {
+            console.log(typeof this.value);
         }
     },
     methods: {
-        filterInput(val) {
-            if (!val) {
-                return;
-            }
-            // 替换除汉字字母数字和指定的字符或特殊符号外的所有内容
-            return val.toString().replace(/[^\d.]/g, '');
+        click() {
+            console.log(typeof this.value === "number");
         }
     }
-}
+};
 </script>

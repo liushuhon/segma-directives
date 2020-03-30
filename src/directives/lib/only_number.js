@@ -24,6 +24,10 @@ const optionCheck = (binding) => {
     if (binding.value.max === binding.value.min && typeof binding.value.max !== 'undefined' && typeof binding.value.min !== 'undefined') {
         throw new Error('The maximum and minimum values cannot be equal');
     }
+    // 最大最小值存在的时候判断最大值是否大于最小值
+    if (binding.value.max < binding.value.min && typeof binding.value.max !== 'undefined' && typeof binding.value.min !== 'undefined') {
+        throw new Error('The minimum should less than maximum');
+    }
 };
 
 /**
@@ -54,8 +58,12 @@ const dealRange = (inputValue, binding) => {
  * @returns {void | string | never}
  */
 const filterChinese = (inputValue) => {
-    let reg = /[^\d.]/g;
+    let reg = /[^\d.|-]/g;
     return inputValue.toString().replace(reg, '');
+    // if (inputValue.toString.charAt(0) === '-') {
+    //     return '-' + inputValue.toString().replace(reg, '');
+    // } else {
+    // }
 };
 /**
  * 阻止输入
@@ -115,10 +123,6 @@ export default {
             }
             // 处理无效值
             let bindValue = e.target.value;
-            if (bindValue === null) {
-                setVal(null, el, vNode);
-                return;
-            }
 
             // 处理数值范围
             let inputVal = dealRange(bindValue, binding);
@@ -137,7 +141,7 @@ export default {
             content = parseFloat(e.target.value);
             let contentStr = String(content);
             if (contentStr.indexOf('.') >= 0 && contentStr.split('.')[1].length > binding.value.precision) {
-                let arg_precision = 0;// 默认保留至整数
+                let arg_precision = 0; // 默认保留至整数
                 if (binding.value.precision) {
                     arg_precision = parseFloat(binding.value.precision);
                 }
