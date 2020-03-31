@@ -10,7 +10,7 @@ node_js:
 # 只对指定的分支执行构建  https://docs.travis-ci.com/user/customizing-the-build/#building-specific-branches
 branches:
     only:
-        - master
+        - dev
 # 要执行的脚本
 script:
     - npm test
