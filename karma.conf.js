@@ -34,7 +34,7 @@ module.exports = function (config) {
                 }
             ]
         },
-        browsers: ['PhantomJS'],
+        browsers: ['ChromeHeadless'],
         singleRun: true,
         captureConsole: true
     })
