@@ -1,40 +1,19 @@
 <template>
     <div class="avatar">
-        <img :src="src"
-             alt="">
+        <img :src="src" alt="" />
     </div>
 </template>
 <script>
 export default {
-    // el() {},
-    // components: {},
-    // directives: {},
-    // filters: {},
     props: {
         src: {
-            default: '',
+            default: "",
             required: false
         }
     }
-    // propsData: {},
-    // data() {},
-    // computed: {},
-    // watch: {},
-    // mounted() {},
-    // created() {},
-    // updated() {},
-    // activated() {},
-    // deactivated() {},
-    // beforeDestroy() {},
-    // destroyed() {},
-    // methods: {},
-    // template: '',
-    // render() {},
 };
 </script>
-<style rel="stylesheet/less"
-       lang="less"
-       scoped>
+<style lang="less" scoped>
 .avatar {
     overflow: hidden;
     border: 1px solid rgba(229, 229, 229, 1);
