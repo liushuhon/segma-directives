@@ -10,8 +10,7 @@ export default {
     name: "SegmaLoading",
     data() {
         return {
-            loading: false,
-            show: true
+            loading: false
         };
     }
 };

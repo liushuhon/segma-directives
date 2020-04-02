@@ -2,11 +2,11 @@ let expect = require('chai').expect;
 
 require('babel-polyfill');
 import Vue from 'vue';
-import Element from 'element-ui';
+// import Element from 'element-ui';
 import Directives from '../src/directives';
 
 Vue.use(Directives);
-Vue.use(Element);
+// Vue.use(Element);
 import {
     createVue,
     destroyVM,
@@ -30,12 +30,10 @@ describe('InputNumber', () => {
                     value: 1.2222
                 };
             }
-        }, true);
-
-        const input = vm.$el.querySelector('.el-input__inner');
-        input.focus();
-        input.blur();
-        expect(vm.value).to.be.equal(1.22);
+        });
+        Vue.nextTick(() => {
+            expect(vm.value).to.be.equal(1.22);
+        })
     });
     it('初始值有中文', () => {
         vm = createVue({
