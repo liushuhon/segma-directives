@@ -6,7 +6,7 @@ module.exports = function (config) {
             'chai'
         ],
         files: [
-            'test_util/**/**.spec.js' //tests目录下，所有.spce.js结尾的测试文件
+            'test_common_component/**/**.spec.js' //tests目录下，所有.spce.js结尾的测试文件
         ],
         preprocessors: {
             '**/*.spec.js': [
@@ -34,7 +34,7 @@ module.exports = function (config) {
                 }
             ]
         },
-        browsers: ['ChromeHeadless'],
+        browsers: ['ChromeHeadless', 'Chrome', 'IE'],
         singleRun: true,
         captureConsole: true
     })
