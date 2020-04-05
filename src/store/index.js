@@ -3,13 +3,20 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const state = {}
+const getters = {}
+const actions = {
+  actionClick() {
+  },
+  actionInput() {
+  },
+}
+const mutations = {}
+
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+  state,
+  getters,
+  mutations,
+  actions,
+  modules: {},
 })
