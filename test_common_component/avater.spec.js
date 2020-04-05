@@ -1,7 +1,4 @@
 import {
-    expect
-} from 'chai'
-import {
     mount
 } from '@vue/test-utils'
 import Avatar from '@/components/Avatar'
