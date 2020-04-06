@@ -4,7 +4,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {}
-const getters = {}
+const getters = {
+  clicks() {},
+  inputValue() {}
+}
 const actions = {
   actionClick() {
   },
