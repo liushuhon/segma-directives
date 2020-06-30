@@ -19,12 +19,10 @@ export default {
     },
     watch: {
         value() {
-            console.log(typeof this.value);
         }
     },
     methods: {
         click() {
-            console.log(typeof this.value === "number");
         }
     }
 };

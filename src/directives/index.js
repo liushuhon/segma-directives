@@ -1,11 +1,4 @@
-import directives from './lib/index';
+import directives from './lib';
 
-const plugins = [directives];
-
-export default {
-    install(Vue) {
-        plugins.forEach(plugin => {
-            Vue.use(plugin);
-    });
-    }
-};
+export const segmaLoading =  directives.segmaLoading;
+export const onlyNumber = directives.onlyNumber;

@@ -1,15 +1,4 @@
-# segma-directives
-
-## 安装依赖
-```
-npm install segma-directives --save
-```
-
-### 配置
-```
-src/plugins/directives/index.js
-
-import { onlyNumber, segmaLoading }  from 'directives';
+import { onlyNumber,segmaLoading }  from 'directives';
 
 const directives = [
     {
@@ -29,5 +18,3 @@ export default {
         });
     }
 };
-
-```
