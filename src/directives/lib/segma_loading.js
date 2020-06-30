@@ -1,5 +1,5 @@
 /**
- * Created by cld on 2020/3/20.
+ * Created by lsh on 2020/6/30.
  */
 // js 文件
 import '../css/segma_loading.css';
@@ -53,7 +53,6 @@ export default {
         }
     },
     update: (el, binding) => {
-        console.log(el.loadingElement.parentNode)
         if (binding.value) {
             if (el.loadingElement.parentNode === null) {
                 el.appendChild(el.loadingElement);

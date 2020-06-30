@@ -3,11 +3,10 @@ module.exports = function (config) {
     config.set({
         frameworks: [
             'mocha',
-            'chai',
-            'sinon-chai'
+            'chai'
         ],
         files: [
-            'test_common_component/**/**.spec.js' //tests目录下，所有.spce.js结尾的测试文件
+            'tests/**/**.spec.js' //tests目录下，所有.spce.js结尾的测试文件
         ],
         preprocessors: {
             '**/*.spec.js': [

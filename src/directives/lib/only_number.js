@@ -1,4 +1,7 @@
 /**
+ * Created by lsh on 2020/6/30.
+ */
+/**
  * 设置输入框的值,触发input事件,改变v-model绑定的值
  * */
 const setVal = (val, el, vNode) => {
@@ -60,10 +63,6 @@ const dealRange = (inputValue, binding) => {
 const filterChinese = (inputValue) => {
     let reg = /[^\d.|-]/g;
     return inputValue.toString().replace(reg, '');
-    // if (inputValue.toString.charAt(0) === '-') {
-    //     return '-' + inputValue.toString().replace(reg, '');
-    // } else {
-    // }
 };
 /**
  * 阻止输入
@@ -116,19 +115,6 @@ export default {
                 preventInput(e);
             }
         });
-        // 按键弹起=>并限制最大最小
-        el.addEventListener('keyup', e => {
-            if (e.keyCode === 8) {
-                return;
-            }
-            // 处理无效值
-            let bindValue = e.target.value;
-
-            // 处理数值范围
-            let inputVal = dealRange(bindValue, binding);
-            let result = filterChinese(inputVal);
-            setVal(result, el, vNode);
-        });
         // 失去焦点=>保留指定位小数
         el.addEventListener('focusout', e => { // 此处会在 el-input 的 @change 后执行
             // 处理无效值
@@ -137,7 +123,6 @@ export default {
                 setVal(null, el, vNode);
                 return;
             }
-
             content = parseFloat(e.target.value);
             let contentStr = String(content);
             if (contentStr.indexOf('.') >= 0 && contentStr.split('.')[1].length > binding.value.precision) {
@@ -148,6 +133,9 @@ export default {
                 content = content.toFixed(arg_precision);
             }
             setVal(Number(content), el, vNode);
+            let inputVal = dealRange(content, binding);
+            let result = filterChinese(inputVal);
+            setVal(Number(result), el, vNode);
         });
     }
 };
