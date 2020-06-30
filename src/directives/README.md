@@ -17,8 +17,8 @@ const directives = [
         directive: number
     },
     {
-            name: 'segma-loading',
-            directive: segmaLoading
+        name: 'segma-loading',
+        directive: segmaLoading
     }
 ];
 
