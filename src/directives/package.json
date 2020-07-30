@@ -1,6 +1,6 @@
 {
   "name": "@segma/segma-directives",
-  "version": "1.2.4",
+  "version": "1.2.14",
   "description": "```\r npm install segma-directives --save\r ```",
   "main": "index.js",
   "directories": {
@@ -10,5 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
 }
