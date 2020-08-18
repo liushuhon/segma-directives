@@ -1,14 +1,12 @@
-import { onlyNumber,segmaLoading }  from 'directives';
+import { onlyNumber }  from '../../directives/index';
+import segmaLoading from '../../directives/lib/segma_loading/index'
 
 const directives = [
-    {
-        name: 'segma-loading',
-        directive: segmaLoading
-    },
+    segmaLoading,
     {
         name: 'number',
         directive: onlyNumber
-    }
+    },
 ];
 
 export default {

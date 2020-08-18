@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div class="segma-loading" v-segma-loading="loading"></div>
+        <div class="segma-loading"
+             v-segma-loading="loading"
+             segma-loading-background="red"
+             segma-loading-text="red"></div>
         <el-button @click="loading = !loading">11</el-button>
     </div>
 </template>

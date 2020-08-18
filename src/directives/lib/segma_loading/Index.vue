@@ -1,4 +1,33 @@
-/* css 文件 */
+<!--Index-->
+<template>
+    <div class="custom-loading"
+         :style="{backgroundColor}">
+        <div class="custom-loading-round">
+            <div class="custom-loading-text"
+                 :style="{textColor}">{{text}}
+            </div>
+            <div class="custom-loading-icon">
+                <img src="./segma_loading.svg">
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'SegmaLoading',
+    data() {
+        return {
+            backgroundColor: 'rgba(255, 255, 255, 0.65)',
+            text: '',
+            textColor: '#1890ff'
+        }
+    }
+};
+</script>
+
+<style lang="less"
+       scoped>
 .custom-loading {
     overflow: hidden;
     position: absolute;
@@ -42,3 +71,4 @@
     width: 100%;
     height: 20px;
 }
+</style>

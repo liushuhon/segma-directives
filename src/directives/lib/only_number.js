@@ -1,7 +1,4 @@
 /**
- * Created by lsh on 2020/6/30.
- */
-/**
  * 设置输入框的值,触发input事件,改变v-model绑定的值
  * */
 const setVal = (val, el, vNode) => {
@@ -16,19 +13,32 @@ const setVal = (val, el, vNode) => {
 };
 
 /**
+ * 获取参数
+ * */
+const getParameter = (binding, key) => {
+    if (typeof binding.value !== 'undefined' && typeof binding.value[key] !== 'undefined') {
+        return binding.value[key];
+    } else {
+        return binding.arg[key];
+    }
+};
+
+/**
  * 参数检查
  * */
 const optionCheck = (binding) => {
+    const max = getParameter(binding, 'max');
+    const min = getParameter(binding, 'min');
     // 范围值是否为数值
-    if ((binding.value.max && typeof binding.value.max !== 'number') || (binding.value.min && typeof binding.value.min !== 'number')) {
+    if ((max && typeof max !== 'number') || (min && typeof min !== 'number')) {
         throw new Error('Range parameter must be numeric');
     }
     // 最大最小值存在的时候判断最大值与最小值是否相等
-    if (binding.value.max === binding.value.min && typeof binding.value.max !== 'undefined' && typeof binding.value.min !== 'undefined') {
+    if (max === min && typeof max !== 'undefined' && typeof min !== 'undefined') {
         throw new Error('The maximum and minimum values cannot be equal');
     }
     // 最大最小值存在的时候判断最大值是否大于最小值
-    if (binding.value.max < binding.value.min && typeof binding.value.max !== 'undefined' && typeof binding.value.min !== 'undefined') {
+    if (max < min && typeof max !== 'undefined' && typeof min !== 'undefined') {
         throw new Error('The minimum should less than maximum');
     }
 };
@@ -44,8 +54,10 @@ const isInvalidVal = (bindValue) => {
  * 处理数值范围，如果输入值超过最大值或最小值，将会被自动设置为边界值
  * */
 const dealRange = (inputValue, binding) => {
-    let bindMax = typeof binding.value.max === 'undefined' ? Infinity : binding.value.max;
-    let bindMin = typeof binding.value.min === 'undefined' ? -Infinity : binding.value.min;
+    const max = getParameter(binding, 'max');
+    const min = getParameter(binding, 'min');
+    let bindMax = typeof max === 'undefined' ? Infinity : max;
+    let bindMin = typeof min === 'undefined' ? -Infinity : min;
     let result = inputValue;
     if (inputValue < bindMin) {
         result = Number(bindMin);
@@ -115,7 +127,7 @@ export default {
                 preventInput(e);
             }
         });
-        // 失去焦点=>保留指定位小数
+        // 失去焦点:处理数值范围，保留指定位小数
         el.addEventListener('focusout', e => { // 此处会在 el-input 的 @change 后执行
             // 处理无效值
             let bindValue = e.target.value;
@@ -123,19 +135,21 @@ export default {
                 setVal(null, el, vNode);
                 return;
             }
-            content = parseFloat(e.target.value);
+            // 处理数值范围
+            let inputVal = dealRange(bindValue, binding);
+            let result = filterChinese(inputVal);
+
+            content = parseFloat(result);
             let contentStr = String(content);
-            if (contentStr.indexOf('.') >= 0 && contentStr.split('.')[1].length > binding.value.precision) {
+            const precision = getParameter(binding, 'precision');
+            if (contentStr.indexOf('.') >= 0 && contentStr.split('.')[1].length > precision) {
                 let arg_precision = 0; // 默认保留至整数
-                if (binding.value.precision) {
-                    arg_precision = parseFloat(binding.value.precision);
+                if (typeof precision !== 'undefined') {
+                    arg_precision = parseFloat(precision);
                 }
                 content = content.toFixed(arg_precision);
             }
             setVal(Number(content), el, vNode);
-            let inputVal = dealRange(content, binding);
-            let result = filterChinese(inputVal);
-            setVal(Number(result), el, vNode);
         });
     }
 };
