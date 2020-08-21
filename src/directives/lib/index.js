@@ -1,8 +1,8 @@
-import onlyNumber from './only_number.js';
+import inputNumber from './input_number/index.js';
 import segmaLoading from './segma_loading/index';
 
 const directives = {
-    onlyNumber, segmaLoading
+    inputNumber, segmaLoading
 };
 
 export default directives;

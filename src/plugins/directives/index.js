@@ -1,16 +1,12 @@
-import { onlyNumber }  from '../../directives/index';
-import segmaLoading from '../../directives/lib/segma_loading/index'
+import { inputNumber, segmaLoading } from '../../directives/index';
 
 const directives = [
     segmaLoading,
-    {
-        name: 'number',
-        directive: onlyNumber
-    },
+    inputNumber
 ];
 
 export default {
-    install(Vue) {
+    install (Vue) {
         directives.forEach(directive => {
             Vue.directive(directive.name, directive.directive);
         });

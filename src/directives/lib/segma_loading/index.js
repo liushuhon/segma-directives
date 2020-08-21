@@ -11,7 +11,7 @@ const getElementStyle = (obj, attr) => {
     }
 };
 
-const toggleLoading = function(el, binding) {
+const toggleLoading = function (el, binding) {
     if (binding.value) {
         Vue.nextTick(() => {
             const position = getElementStyle(el, 'position');
@@ -30,31 +30,28 @@ const toggleLoading = function(el, binding) {
 export default {
     name: 'segmaLoading',
     directive: {
-        bind(el, binding, Vnode) {
-            let backgroundColor = null;
-            let text = null;
-            if (Vnode.data && Vnode.data.attrs) {
-                backgroundColor = typeof Vnode.data.attrs['segma-loading-background'] === 'undefined' ? null : Vnode.data.attrs['segma-loading-background'];
-                text = typeof Vnode.data.attrs['segma-loading-text'] === 'undefined' ? null : Vnode.data.attrs['segma-loading-text'];
-            }
+        bind (el, binding, Vnode) {
+            const backgroundElem = el.getAttribute('segma-loading-background');
+            const textElem = el.getAttribute('segma-loading-text');
+            const vm = Vnode.context;
             const mask = new Mask({
+                el: document.createElement('div'),
                 data: {
-                    backgroundColor,
-                    text
+                    backgroundColor: vm && vm[backgroundElem] || backgroundElem,
+                    text: vm && vm[textElem] || textElem
                 }
             });
-            mask.$mount();
             el.instance = mask;
             el.mask = mask.$el;
             toggleLoading(el, binding);
         },
-        update(el, binding) {
+        update (el, binding) {
             if (binding.oldValue !== binding.value) {
                 toggleLoading(el, binding);
             }
         },
         //只调用一次，指令与元素解绑时调用
-        unbind(el) {
+        unbind (el) {
             el.mask && el.mask.parentNode && el.mask.parentNode.removeChild(el.mask);
             el.instance && el.instance.$destroy();
         }

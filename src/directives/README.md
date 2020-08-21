@@ -15,21 +15,15 @@ npm i @segma/segma-directives --save
 ```shell script
 src/plugins/directives/index.js
 
-import { onlyNumber, segmaLoading }  from '@segma/segma-directives';
+import { inputNumber, segmaLoading } from '../../directives/index';
 
 const directives = [
-    {
-        name: 'segma-loading',
-        directive: segmaLoading
-    },
-    {
-        name: 'number',
-        directive: onlyNumber
-    }
+    segmaLoading,
+    inputNumber
 ];
 
 export default {
-    install(Vue) {
+    install (Vue) {
         directives.forEach(directive => {
             Vue.directive(directive.name, directive.directive);
         });
