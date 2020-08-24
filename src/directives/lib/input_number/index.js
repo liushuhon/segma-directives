@@ -88,69 +88,71 @@ const preventInput = (event) => {
 };
 export default {
     name: 'number',
-    bind(el, binding, vNode) {
-        optionCheck(binding);
-        // 处理无效值
-        let bindValue = vNode.data.model.value;
-        if (isInvalidVal(bindValue)) {
-            setVal(null, el, vNode);
-            return;
-        }
-
-        // 处理数值范围
-        let inputVal = dealRange(bindValue, binding);
-        setVal(inputVal, el, vNode);
-    },
-    inserted(el, binding, vNode) {
-        let content;
-        // 按键按下=>只允许按照一定规则输入 数字/小数点/减号
-        el.addEventListener('keypress', e => {
-            const inputKey = String.fromCharCode(typeof e.charCode === 'number' ? e.charCode : e.keyCode);
-            const inputReg = /\d|\.|-/;
-            content = e.target.value;
-            /**
-             * 1.输入值不是数字、小数点、减号
-             * 2.输入框为空或只有减号，不能输入小数点
-             * 3.重复输入小数点
-             * 4.输入框已有值，不能输入减号
-             * 5.重复输入减号
-             */
-            // todo:已有值的时候，选中输入框的所有值输入减号‘-’，无法覆盖输入
-            if (!inputReg.test(inputKey)) {
-                preventInput(e);
-            } else if (((content === '' || content === '-') && inputKey === '.')) {
-                preventInput(e);
-            } else if ((content.indexOf('.') !== -1 && inputKey === '.')) {
-                preventInput(e);
-            } else if ((content !== '' && inputKey === '-')) {
-                preventInput(e);
-            } else if ((content.indexOf('-') !== -1 && inputKey === '-')) {
-                preventInput(e);
-            }
-        });
-        // 失去焦点:处理数值范围，保留指定位小数
-        el.addEventListener('focusout', e => { // 此处会在 el-input 的 @change 后执行
+    directive: {
+        bind(el, binding, vNode) {
+            optionCheck(binding);
             // 处理无效值
-            let bindValue = e.target.value;
+            let bindValue = vNode.data.model.value;
             if (isInvalidVal(bindValue)) {
                 setVal(null, el, vNode);
                 return;
             }
+
             // 处理数值范围
             let inputVal = dealRange(bindValue, binding);
-            let result = filterChinese(inputVal);
-
-            content = parseFloat(result);
-            let contentStr = String(content);
-            const precision = getParameter(binding, 'precision');
-            if (contentStr.indexOf('.') >= 0 && contentStr.split('.')[1].length > precision) {
-                let arg_precision = 0; // 默认保留至整数
-                if (typeof precision !== 'undefined') {
-                    arg_precision = parseFloat(precision);
+            setVal(inputVal, el, vNode);
+        },
+        inserted(el, binding, vNode) {
+            let content;
+            // 按键按下=>只允许按照一定规则输入 数字/小数点/减号
+            el.addEventListener('keypress', e => {
+                const inputKey = String.fromCharCode(typeof e.charCode === 'number' ? e.charCode : e.keyCode);
+                const inputReg = /\d|\.|-/;
+                content = e.target.value;
+                /**
+                 * 1.输入值不是数字、小数点、减号
+                 * 2.输入框为空或只有减号，不能输入小数点
+                 * 3.重复输入小数点
+                 * 4.输入框已有值，不能输入减号
+                 * 5.重复输入减号
+                 */
+                // todo:已有值的时候，选中输入框的所有值输入减号‘-’，无法覆盖输入
+                if (!inputReg.test(inputKey)) {
+                    preventInput(e);
+                } else if (((content === '' || content === '-') && inputKey === '.')) {
+                    preventInput(e);
+                } else if ((content.indexOf('.') !== -1 && inputKey === '.')) {
+                    preventInput(e);
+                } else if ((content !== '' && inputKey === '-')) {
+                    preventInput(e);
+                } else if ((content.indexOf('-') !== -1 && inputKey === '-')) {
+                    preventInput(e);
                 }
-                content = content.toFixed(arg_precision);
-            }
-            setVal(Number(content), el, vNode);
-        });
+            });
+            // 失去焦点:处理数值范围，保留指定位小数
+            el.addEventListener('focusout', e => { // 此处会在 el-input 的 @change 后执行
+                // 处理无效值
+                let bindValue = e.target.value;
+                if (isInvalidVal(bindValue)) {
+                    setVal(null, el, vNode);
+                    return;
+                }
+                // 处理数值范围
+                let inputVal = dealRange(bindValue, binding);
+                let result = filterChinese(inputVal);
+
+                content = parseFloat(result);
+                let contentStr = String(content);
+                const precision = getParameter(binding, 'precision');
+                if (contentStr.indexOf('.') >= 0 && contentStr.split('.')[1].length > precision) {
+                    let arg_precision = 0; // 默认保留至整数
+                    if (typeof precision !== 'undefined') {
+                        arg_precision = parseFloat(precision);
+                    }
+                    content = content.toFixed(arg_precision);
+                }
+                setVal(Number(content), el, vNode);
+            });
+        }
     }
 };
