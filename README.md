@@ -12,10 +12,10 @@ npm i @segma/segma-directives --save
 
 ### 2.配置
 
-```shell script
+```vue
 src/plugins/directives/index.js
 
-import { inputNumber, segmaLoading } from '../../directives/index';
+import { segmaLoading, inputNumber } from '@segma/segma-directives';
 
 const directives = [
     segmaLoading,
@@ -23,13 +23,12 @@ const directives = [
 ];
 
 export default {
-    install (Vue) {
-        directives.forEach(directive => {
-            Vue.directive(directive.name, directive.directive);
+    install(vue) {
+        directives.forEach(d => {
+            vue.directive(d.name, d.directive);
         });
     }
 };
-
 ```
 
 
@@ -80,4 +79,4 @@ precision: 最大小数位数配置
 
 ## 打包
 
-npm run rollupBuild
+npm run rollupbuild
