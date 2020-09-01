@@ -1,4 +1,7 @@
 import directives from './lib';
 
-export const segmaLoading =  directives.segmaLoading;
-export const inputNumber = directives.inputNumber;
+const segmaLoading = directives.segmaLoading;
+const inputNumber = directives.inputNumber;
+
+
+export { segmaLoading, inputNumber }
